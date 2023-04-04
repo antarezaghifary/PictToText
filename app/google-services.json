@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "129483869781",
+    "project_id": "picttotext",
+    "storage_bucket": "picttotext.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129483869781:android:6e120eac14ad30c7b74edc",
+        "android_client_info": {
+          "package_name": "com.samrez.picttotext"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129483869781-grtadvem3j0gc2durk9jjr6lah9cl4an.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Vwcx2X6L2PPU6lJEKDg7mLCU4xEaNlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129483869781-grtadvem3j0gc2durk9jjr6lah9cl4an.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
