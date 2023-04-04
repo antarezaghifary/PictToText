@@ -13,12 +13,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.samrez.picttotext.R
 import com.samrez.picttotext.databinding.ActivityAddPictResultBinding
+import com.samrez.picttotext.model.ItemModel
 
 class AddPictResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddPictResultBinding
@@ -72,7 +75,27 @@ class AddPictResultActivity : AppCompatActivity() {
             launcherIntentEditResult.launch(intent)
         }
 
-        binding.btnUploadResult.setOnClickListener {}
+        binding.btnUploadResult.setOnClickListener {
+
+            FirebaseApp.initializeApp(this)
+            dbReference = FirebaseDatabase.getInstance("https://picttotext-default-rtdb.firebaseio.com/").getReference("items")
+
+            val item = ItemModel(textResult)
+
+            val databaseReference = FirebaseDatabase.getInstance("https://picttotext-default-rtdb.firebaseio.com/").reference
+            val id = databaseReference.push().key
+            dbReference.child(id.toString()).setValue(item).addOnCompleteListener {
+                Toast.makeText(this, "Success upload data to Firebase", Toast.LENGTH_SHORT).show()
+
+                textResult = ""
+                binding.tvResultCapture.text = textResult
+                binding.btnEditResult.visibility = View.GONE
+                binding.btnUploadResult.visibility = View.GONE
+            }.addOnFailureListener {
+                Toast.makeText(this, "Failed upload data to Firebase", Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 
     private val launcherIntentEditResult = registerForActivityResult(
